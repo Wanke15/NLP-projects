@@ -2,3 +2,4 @@ pytest
 numpy
 scikit-learn
 flask
+gunicorn
