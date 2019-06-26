@@ -11,7 +11,7 @@ from apis.app import nlp_bp
 def create_app():
     logger = logging.getLogger(__name__)
 
-    app = Flask('MTWO AI Services')
+    app = Flask('NLP Services')
 
     app.register_blueprint(nlp_bp)  # main blue print
 
