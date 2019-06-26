@@ -11,3 +11,11 @@ install:
 # command to run tests
 script:
   - python tests/hello.py
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: 7ca670b3-7dfc-4823-883b-dd2d53eda87e
+  app: nlp-projects
+  on:
+    repo: Wanke15/NLP-projects
