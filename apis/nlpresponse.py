@@ -7,7 +7,7 @@ class NLPResponse(Response):
     def __init__(self, body, status_code, jsonfy=True):
         if body is not None:
             if jsonfy:
-                super().__init__(json.dumps(body), status=status_code, mimetype='application/json')
+                super().__init__(json.dumps(body, ensure_ascii=False), status=status_code, mimetype='application/json')
             else:
                 super().__init__(body, status=status_code)
         else:
