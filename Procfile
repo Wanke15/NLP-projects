@@ -1,1 +1,1 @@
-web: gunicorn nlp_app:app
+web:gunicorn wsgi:app
