@@ -3,7 +3,6 @@ import pandas as pd
 import jieba
 
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.model_selection import train_test_split
 
 from sklearn.externals import joblib
@@ -29,7 +28,7 @@ def load_data(pos_path='training/sentiment_analysis/data/pos.xls', neg_path='tra
 data, targets = load_data()
 assert len(data) == len(targets), 'data and targets number not equal'
 
-with open('training/sentiment_analysis/data/中文停用词表.txt', 'r', encoding='utf8') as f:
+with open('resources/data/中文停用词表.txt', 'r', encoding='utf8') as f:
     stop_words = f.readlines()
     stop_words = [_.strip() for _ in stop_words]
 

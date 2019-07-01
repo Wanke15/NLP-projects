@@ -1,35 +1,41 @@
-from sklearn.externals import joblib
-import jieba
+from common.post_processing import SentimentPostprocessor
+from common.preprocessing import SentimentPreprocessor
+from common.architect import MLPipeline
+from sentiment_analysis.model import SentimentModel
 
 
-class Sentiment:
-    def __init__(self):
-        self.count_vec = None
-        self.classifier = None
-        self.stop_words = None
-        self.class_dict = {0: '消极', 1: '积极'}
+class SentimentPipeline(MLPipeline):
+    instance = None
 
-    def preprocess(self, sentence):
+    def __init__(self, pre_processor=None, predictor=None, post_processor=None):
+        super().__init__(pre_processor=pre_processor, predictor=predictor, post_processor=post_processor)
+
+    def process(self, sentence):
         if not isinstance(sentence, list):
-            sentence = list(sentence)
-        return_data = []
-        for record in sentence:
-            _tmp = jieba.lcut(record)
-            return_data.append(" ".join([_ for _ in _tmp if _ not in self.stop_words]))
-        return return_data
-    
-    def load(self, count_vec_path, classifier_path, stop_words_path):
-        self.count_vec = joblib.load(count_vec_path)
-        self.classifier = joblib.load(classifier_path)
+            raw_sentence = [sentence]
+            result = [sentence]
+        else:
+            raw_sentence = sentence
+            result = sentence
+        if self.pre_processor is not None:
+            result = self.pre_processor(result)
+        if self.predictor is not None:
+            result = self.predictor(result)
+        if self.post_processor is not None:
+            result = self.post_processor(raw_sentence, result)
+        return result
 
-        with open(stop_words_path, 'r', encoding='utf8') as f:
-            stop_words = f.readlines()
-            self.stop_words = [_.strip() for _ in stop_words]
+    @classmethod
+    def init(cls, count_vec_path, classifier_path, stop_words_path):
+        sentiment_preprocessor = SentimentPreprocessor(stop_words_path)
+        sentiment_model = SentimentModel(count_vec_path, classifier_path)
+        sentiment_postprocessor = SentimentPostprocessor()
 
-    def predict(self, sentence):
-        sentence = self.preprocess(sentence)
-        sentence_vec = self.count_vec.transform(sentence)
+        cls.instance = SentimentPipeline(pre_processor=sentiment_preprocessor.preprocess,
+                                         predictor=sentiment_model.process,
+                                         post_processor=sentiment_postprocessor.post_process)
 
-        predicted = self.classifier.predict(sentence_vec)
-
-        return {'sentiment': self.class_dict.get(predicted[0])}
+    @classmethod
+    def predict(cls, sentence):
+        result = cls.instance.process(sentence)
+        return result

@@ -1,3 +1,5 @@
+werkzeug
+PyYAML
 pytest
 flask
 gunicorn

@@ -6,6 +6,7 @@ from importlib import import_module
 from flask import Flask
 
 from apis.app import nlp_bp
+from apis.utils import get_config
 
 
 def create_app():
@@ -15,8 +16,9 @@ def create_app():
 
     app.register_blueprint(nlp_bp)  # main blue print
 
-    # services = config.get('services', constants.DEFAULT_SERVICES)
-    services = ['basic']
+    config = get_config()
+    services = config.get('services')
+    # services = ['basic']
     for service in services:
         try:
             service_module_name = "apis.{}.api".format(service)

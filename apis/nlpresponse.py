@@ -12,3 +12,4 @@ class NLPResponse(Response):
                 super().__init__(body, status=status_code)
         else:
             super().__init__(json.dumps(dict()), status=status_code, mimetype='application/json')
+
