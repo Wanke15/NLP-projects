@@ -1,0 +1,16 @@
+local/
+data/err/
+data/dataset/.ipynb_checkpoints/
+.idea/
+*.ipynb
+*.pyc
+*.pkl
+data/CoNLL04/vecs.lc.over100freq.txt
+logs/
+data/ace04/
+configs/bio_config_ace04
+data/DREC/embeddings_matrix.txt
+data/DREC/drec.zip
+data/DREC/dev.tsv
+data/DREC/test.tsv
+data/DREC/train.tsv

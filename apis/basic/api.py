@@ -15,7 +15,7 @@ def init_ws():
 
 
 def init():
-    logger.info('NLP API initializing...')
+    logger.info('NLP basic API initializing...')
     init_ws()
 
 
