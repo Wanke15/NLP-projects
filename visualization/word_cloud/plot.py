@@ -17,12 +17,10 @@ class WordCloudVis:
 
     def word_cloud(self, text):
         all_words = [word.lower() for word in jieba.cut(text, cut_all=False) if word not in self.stopwords and len(word) > 1]
-        counter = {k:v for k,v in Counter(all_words).items() if v >2}
+        counter = {k:v for k,v in Counter(all_words).items() if v >1}
 
         wordcloud = WordCloud()
         wordcloud.add("Word cloud", counter.items(), word_size_range=[10, 100], shape='diamond')
         _name = uuid.uuid4()
-        if not os.path.exists(os.path.join(self.base_dir, 'templates/vis/word_cloud')):
-            os.mkdir(os.path.join(self.base_dir, 'templates/vis/word_cloud'))
         wordcloud.render(os.path.join(self.base_dir, 'templates/vis/word_cloud/{}.html'.format(_name)))
         return _name
