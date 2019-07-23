@@ -22,5 +22,7 @@ class WordCloudVis:
         wordcloud = WordCloud()
         wordcloud.add("", counter.items(), word_size_range=[10, 80], shape='diamond')
         _name = uuid.uuid4()
+        if not os.path.exists(os.path.join(self.base_dir, 'templates/vis/word_cloud')):
+            os.mkdir(os.path.join(self.base_dir, 'templates/vis/word_cloud'))
         wordcloud.render(os.path.join(self.base_dir, 'templates/vis/word_cloud/{}.html'.format(_name)))
         return _name
