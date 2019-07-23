@@ -1,3 +1,4 @@
 services:
   - basic
   - sentiment_analysis
+  - word_cloud
