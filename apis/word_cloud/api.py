@@ -472,7 +472,7 @@ def index():
         return InvalidInputException("No text provided to draw word cloud!")
     try:
         _name = plotter.word_cloud(text)
-        return render_template('vis/basic.html', res_html=f'vis/word_cloud/{_name}.html')
+        return render_template('vis/basic.html', title='Word Cloud', res_html=f'vis/word_cloud/{_name}.html')
     except Exception as e:
         print(e)
         return "Render error!"
