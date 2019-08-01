@@ -2,3 +2,5 @@ services:
   - basic
   - sentiment_analysis
   - word_cloud
+  - ner
+  - key_words

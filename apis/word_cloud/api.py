@@ -1,11 +1,10 @@
 import logging
-import os
 
 from flask import request, render_template
 
 
 from apis.nlpblueprint import NLPBlueprint
-from apis.nlpexception import InvalidInputException, NLPException
+from apis.nlpexception import InvalidInputException
 from apis import utils
 
 from visualization.word_cloud.plot import WordCloudVis
