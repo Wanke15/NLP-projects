@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 
 class MLPipeline(ABC):
-    def __init__(self, pre_processor, predictor, post_processor):
+    def __init__(self, pre_processor=None, predictor=None, post_processor=None):
         if pre_processor is not None:
             self.pre_processor = pre_processor
         else:
