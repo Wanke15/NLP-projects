@@ -22,7 +22,7 @@ class AttentionOCRLogging:
 
         # define log format
         formatter = logging.Formatter(
-            '[%(asctime)s] %(filename)s->%(funcName)s line:%(lineno)d [%(levelname)s]%(message)s')
+            '[%(asctime)s] %(filename)s->%(funcName)s line:%(lineno)d [%(levelname)s] %(message)s')
         fh.setFormatter(formatter)
         ch.setFormatter(formatter)
 
@@ -47,6 +47,6 @@ if __name__ == '__main__':
 
     test_logger()
 
-# [2019-11-19 15:51:38,979] attention_ocr_logging.py->test_logger line:42 [INFO]info test
-# [2019-11-19 15:51:38,980] attention_ocr_logging.py->test_logger line:43 [WARNING]warning test
-# [2019-11-19 15:51:38,980] attention_ocr_logging.py->test_logger line:44 [ERROR]error test
+# [2019-11-19 15:51:38,979] attention_ocr_logging.py->test_logger line:42 [INFO] info test
+# [2019-11-19 15:51:38,980] attention_ocr_logging.py->test_logger line:43 [WARNING] warning test
+# [2019-11-19 15:51:38,980] attention_ocr_logging.py->test_logger line:44 [ERROR] error test
